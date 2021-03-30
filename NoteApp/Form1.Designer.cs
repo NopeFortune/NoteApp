@@ -41,7 +41,7 @@ namespace NoteApp
             this.tsmiCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiInsert = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFind = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFindNext = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +123,7 @@ namespace NoteApp
             this.tsmiCancel,
             this.tsmiCut,
             this.tsmiCopy,
-            this.tsmiInsert,
+            this.tsmiPaste,
             this.tsmiDelete,
             this.tsmiFind,
             this.tsmiFindNext,
@@ -142,6 +142,7 @@ namespace NoteApp
             this.tsmiCancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.tsmiCancel.Size = new System.Drawing.Size(194, 22);
             this.tsmiCancel.Text = "Отменить";
+            this.tsmiCancel.Click += new System.EventHandler(this.tsmiCancel_Click);
             // 
             // tsmiCut
             // 
@@ -149,6 +150,7 @@ namespace NoteApp
             this.tsmiCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.tsmiCut.Size = new System.Drawing.Size(194, 22);
             this.tsmiCut.Text = "Вырезать";
+            this.tsmiCut.Click += new System.EventHandler(this.tsmiCut_Click);
             // 
             // tsmiCopy
             // 
@@ -156,13 +158,15 @@ namespace NoteApp
             this.tsmiCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.tsmiCopy.Size = new System.Drawing.Size(194, 22);
             this.tsmiCopy.Text = "Копировать";
+            this.tsmiCopy.Click += new System.EventHandler(this.tsmiCopy_Click);
             // 
-            // tsmiInsert
+            // tsmiPaste
             // 
-            this.tsmiInsert.Name = "tsmiInsert";
-            this.tsmiInsert.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.tsmiInsert.Size = new System.Drawing.Size(194, 22);
-            this.tsmiInsert.Text = "Вставить";
+            this.tsmiPaste.Name = "tsmiPaste";
+            this.tsmiPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.tsmiPaste.Size = new System.Drawing.Size(194, 22);
+            this.tsmiPaste.Text = "Вставить";
+            this.tsmiPaste.Click += new System.EventHandler(this.tsmiPaste_Click);
             // 
             // tsmiDelete
             // 
@@ -170,6 +174,7 @@ namespace NoteApp
             this.tsmiDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.tsmiDelete.Size = new System.Drawing.Size(194, 22);
             this.tsmiDelete.Text = "Удалить";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
             // 
             // tsmiFind
             // 
@@ -177,6 +182,7 @@ namespace NoteApp
             this.tsmiFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.tsmiFind.Size = new System.Drawing.Size(194, 22);
             this.tsmiFind.Text = "Найти";
+            this.tsmiFind.Click += new System.EventHandler(this.tsmiFind_Click);
             // 
             // tsmiFindNext
             // 
@@ -184,6 +190,7 @@ namespace NoteApp
             this.tsmiFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
             this.tsmiFindNext.Size = new System.Drawing.Size(194, 22);
             this.tsmiFindNext.Text = "Найти далее";
+            this.tsmiFindNext.Click += new System.EventHandler(this.tsmiFindNext_Click);
             // 
             // tsmiFindPrevious
             // 
@@ -191,6 +198,7 @@ namespace NoteApp
             this.tsmiFindPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F3)));
             this.tsmiFindPrevious.Size = new System.Drawing.Size(194, 22);
             this.tsmiFindPrevious.Text = "Найти ранее";
+            this.tsmiFindPrevious.Click += new System.EventHandler(this.tsmiFindPrevious_Click);
             // 
             // tsmiReplace
             // 
@@ -198,6 +206,7 @@ namespace NoteApp
             this.tsmiReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.tsmiReplace.Size = new System.Drawing.Size(194, 22);
             this.tsmiReplace.Text = "Заменить";
+            this.tsmiReplace.Click += new System.EventHandler(this.tsmiReplace_Click);
             // 
             // tsmiGoOn
             // 
@@ -205,6 +214,7 @@ namespace NoteApp
             this.tsmiGoOn.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.tsmiGoOn.Size = new System.Drawing.Size(194, 22);
             this.tsmiGoOn.Text = "Перейти";
+            this.tsmiGoOn.Click += new System.EventHandler(this.tsmiGoOn_Click);
             // 
             // tsmiSelectAll
             // 
@@ -212,6 +222,7 @@ namespace NoteApp
             this.tsmiSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.tsmiSelectAll.Size = new System.Drawing.Size(194, 22);
             this.tsmiSelectAll.Text = "Выделить всё";
+            this.tsmiSelectAll.Click += new System.EventHandler(this.tsmiSelectAll_Click);
             // 
             // tsmiDateAndTime
             // 
@@ -219,10 +230,12 @@ namespace NoteApp
             this.tsmiDateAndTime.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.tsmiDateAndTime.Size = new System.Drawing.Size(194, 22);
             this.tsmiDateAndTime.Text = "Время и дата";
+            this.tsmiDateAndTime.Click += new System.EventHandler(this.tsmiDateAndTime_Click);
             // 
             // tbMain
             // 
             this.tbMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbMain.Location = new System.Drawing.Point(0, 24);
             this.tbMain.Multiline = true;
             this.tbMain.Name = "tbMain";
@@ -262,7 +275,7 @@ namespace NoteApp
         private System.Windows.Forms.ToolStripMenuItem tsmiCancel;
         private System.Windows.Forms.ToolStripMenuItem tsmiCut;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopy;
-        private System.Windows.Forms.ToolStripMenuItem tsmiInsert;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPaste;
         private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
         private System.Windows.Forms.ToolStripMenuItem tsmiFind;
         private System.Windows.Forms.ToolStripMenuItem tsmiFindNext;

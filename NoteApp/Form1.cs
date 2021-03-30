@@ -16,34 +16,9 @@ namespace NoteApp
 
         private void tsmiCreate_Click(object sender, EventArgs e)
         {
-            // TODO: вынести в метод
             path = string.Empty;
-            if (string.IsNullOrWhiteSpace(tbMain.Text))
-            {
-                tbMain.Clear();
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show(
-                    "Вы хотите сохранить изменения?",
-                    "NoteApp",
-                    MessageBoxButtons.YesNoCancel
-                    );
-
-                switch (result)
-                {
-                    case DialogResult.Yes:
-                        MessageBox.Show("saved");
-                        break;
-                    case DialogResult.No:
-                    case DialogResult.Cancel:
-                        tbMain.Clear();
-                        break;
-                }
-            }
-
+            SaveCheck();
         }
-
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
             LoadFile(path);
@@ -67,28 +42,68 @@ namespace NoteApp
 
         
         // TODO: Пофиксить path = null;
-        private async void SaveFile(string path)
+        
+
+
+        private void tsmiCancel_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(path))
-            {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Текстовые файлы|*.txt", ValidateNames = true })
-                {
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
-                        {
-                            await sw.WriteAsync(tbMain.Text);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    await sw.WriteAsync(tbMain.Text);
-                }
-            }
+            tbMain.Undo();
+        }
+
+        private void tsmiCut_Click(object sender, EventArgs e)
+        {
+            tbMain.Cut();
+        }
+
+        private void tsmiCopy_Click(object sender, EventArgs e)
+        {
+            tbMain.Copy();
+        }
+
+        private void tsmiPaste_Click(object sender, EventArgs e)
+        {
+            tbMain.Paste();
+        }
+
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tsmiFind_Click(object sender, EventArgs e)
+        {
+            SearchForm form = new SearchForm();
+            form.Show();
+        }
+
+        private void tsmiFindNext_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tsmiFindPrevious_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tsmiReplace_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tsmiGoOn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsmiSelectAll_Click(object sender, EventArgs e)
+        {
+            tbMain.SelectAll();
+        }
+
+        private void tsmiDateAndTime_Click(object sender, EventArgs e)
+        {
+            // TODO: Фикс курсор
+            tbMain.Text += DateTime.Now.ToString() + " ";
         }
 
         private async void SaveFileAs(string path)
@@ -114,7 +129,6 @@ namespace NoteApp
                 }
             }
         }
-
         private async void LoadFile(string path)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Text Document|*.txt", ValidateNames = true, Multiselect = false })
@@ -126,6 +140,57 @@ namespace NoteApp
                         path = openFileDialog.FileName;
                         tbMain.Text = await sr.ReadToEndAsync();
                     }
+                }
+            }
+        }
+        private async void SaveFile(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Текстовые файлы|*.txt", ValidateNames = true })
+                {
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
+                        {
+                            await sw.WriteAsync(tbMain.Text);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    await sw.WriteAsync(tbMain.Text);
+                }
+            }
+        }
+
+        private void SaveCheck()
+        {
+            // TODO: доделать (удалять всё)
+            if (string.IsNullOrWhiteSpace(tbMain.Text))
+            {
+                tbMain.Clear();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(
+                    "Вы хотите сохранить изменения?",
+                    "NoteApp",
+                    MessageBoxButtons.YesNoCancel
+                    );
+
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        SaveFile(path);
+                        break;
+                    case DialogResult.No:
+                    case DialogResult.Cancel:
+                        tbMain.Clear();
+                        break;
                 }
             }
         }
