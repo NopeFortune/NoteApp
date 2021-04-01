@@ -67,6 +67,7 @@ namespace NoteApp
             this.btnFindNext.TabIndex = 2;
             this.btnFindNext.Text = "Найти далее";
             this.btnFindNext.UseVisualStyleBackColor = true;
+            this.btnFindNext.Click += new System.EventHandler(this.btnFindNext_Click);
             // 
             // btnCancel
             // 
@@ -150,7 +151,7 @@ namespace NoteApp
         #endregion
 
         private System.Windows.Forms.Label lbWhat;
-        private System.Windows.Forms.TextBox tbSearch;
+        internal System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Button btnFindNext;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox cbRegister;

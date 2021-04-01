@@ -21,5 +21,9 @@ namespace NoteApp
         {
             this.Close();
         }
+
+        private void btnFindNext_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NoteApp
 {
     public partial class Form1 : Form
     {
-        string path;
         public Form1()
         {
+            // TODO: Добавить выведение названия файла в тайтл
             InitializeComponent();
         }
 
+        string path;
         private void tsmiCreate_Click(object sender, EventArgs e)
         {
+
             path = string.Empty;
             SaveCheck();
         }
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
-            LoadFile(path);
+            LoadFile();
         }
 
         private void tsmiSave_Click(object sender, EventArgs e)
@@ -36,14 +36,9 @@ namespace NoteApp
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            //TODO: Проверка на сейв
+            SaveCheck();
             this.Close();
         }
-
-        
-        // TODO: Пофиксить path = null;
-        
-
 
         private void tsmiCancel_Click(object sender, EventArgs e)
         {
@@ -65,15 +60,18 @@ namespace NoteApp
             tbMain.Paste();
         }
 
-        private void tsmiDelete_Click(object sender, EventArgs e)
+        private void tsmiDelete_Click(object sender, EventArgs e)   
         {
-            
+            // TODO: фикс курсор
+            if (!string.IsNullOrWhiteSpace(tbMain.Text))
+            {
+                tbMain.Text = tbMain.Text.Remove(tbMain.Text.Length - 1);
+            }
         }
 
         private void tsmiFind_Click(object sender, EventArgs e)
         {
-            SearchForm form = new SearchForm();
-            form.Show();
+            // TODO: доделать поиск
         }
 
         private void tsmiFindNext_Click(object sender, EventArgs e)
@@ -82,12 +80,12 @@ namespace NoteApp
 
         private void tsmiFindPrevious_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tsmiReplace_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tsmiGoOn_Click(object sender, EventArgs e)
@@ -106,30 +104,24 @@ namespace NoteApp
             tbMain.Text += DateTime.Now.ToString() + " ";
         }
 
+        #region Methods
+
+        // TODO : создавать новый файл
+
         private async void SaveFileAs(string path)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Текстовые файлы|*.txt", ValidateNames = true })
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Текстовые файлы|*.txt", ValidateNames = true })
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
                     {
-                        using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
-                        {
-                            await sw.WriteAsync(tbMain.Text);
-                        }
+                        await sw.WriteAsync(tbMain.Text);
                     }
                 }
             }
-            else
-            {
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    await sw.WriteAsync(tbMain.Text);
-                }
-            }
         }
-        private async void LoadFile(string path)
+        private async void LoadFile()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Text Document|*.txt", ValidateNames = true, Multiselect = false })
             {
@@ -188,11 +180,13 @@ namespace NoteApp
                         SaveFile(path);
                         break;
                     case DialogResult.No:
-                    case DialogResult.Cancel:
                         tbMain.Clear();
+                        break;
+                    case DialogResult.Cancel:
                         break;
                 }
             }
         }
+        #endregion
     }
 }
