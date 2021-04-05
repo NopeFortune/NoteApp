@@ -12,9 +12,15 @@ namespace NoteApp
 {
     public partial class SearchForm : Form
     {
-        public SearchForm()
+        private bool direction;
+        private bool register;
+
+        private Form1 Form;
+        public SearchForm(Form1 form)
         {
+            this.Form = form;
             InitializeComponent();
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -22,8 +28,33 @@ namespace NoteApp
             this.Close();
         }
 
-        private void btnFindNext_Click(object sender, EventArgs e)
+        internal void btnFindNext_Click(object sender, EventArgs e)
         {
+            #region direction
+            if (rbDown.Checked == true)
+            {
+                direction = true;
+            }
+            else
+            {
+                direction = false;
+            }
+            #endregion
+
+            #region register
+            if (cbRegister.Checked == true)
+            {
+                register = true;
+            }
+            else
+            {
+                register = false;
+            }
+            #endregion
+            
+            Form.TestMethod(tbSearch.Text, direction, register);
+
+
         }
     }
 }

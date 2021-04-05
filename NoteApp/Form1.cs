@@ -13,9 +13,9 @@ namespace NoteApp
         }
 
         string path;
+
         private void tsmiCreate_Click(object sender, EventArgs e)
         {
-
             path = string.Empty;
             SaveCheck();
         }
@@ -23,85 +23,69 @@ namespace NoteApp
         {
             LoadFile();
         }
-
         private void tsmiSave_Click(object sender, EventArgs e)
         {
             SaveFile(path);
         }
-
         private void tsmiSaveAs_Click(object sender, EventArgs e)
         {
             SaveFileAs(path);
         }
-
         private void tsmiExit_Click(object sender, EventArgs e)
         {
             SaveCheck();
             this.Close();
         }
-
-        private void tsmiCancel_Click(object sender, EventArgs e)
-        {
-            tbMain.Undo();
-        }
-
-        private void tsmiCut_Click(object sender, EventArgs e)
-        {
-            tbMain.Cut();
-        }
-
-        private void tsmiCopy_Click(object sender, EventArgs e)
-        {
-            tbMain.Copy();
-        }
-
-        private void tsmiPaste_Click(object sender, EventArgs e)
-        {
-            tbMain.Paste();
-        }
-
-        private void tsmiDelete_Click(object sender, EventArgs e)   
-        {
-            // TODO: фикс курсор
-            if (!string.IsNullOrWhiteSpace(tbMain.Text))
-            {
-                tbMain.Text = tbMain.Text.Remove(tbMain.Text.Length - 1);
-            }
-        }
-
         private void tsmiFind_Click(object sender, EventArgs e)
         {
             // TODO: доделать поиск
+            SearchForm sf = new SearchForm(this);
+            sf.Show();
         }
-
         private void tsmiFindNext_Click(object sender, EventArgs e)
         {
+            SearchForm sf = new SearchForm(this);
+            sf.btnFindNext_Click(sender, e);
         }
-
         private void tsmiFindPrevious_Click(object sender, EventArgs e)
         {
-
         }
-
         private void tsmiReplace_Click(object sender, EventArgs e)
         {
 
         }
-
         private void tsmiGoOn_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void tsmiSelectAll_Click(object sender, EventArgs e)
-        {
-            tbMain.SelectAll();
-        }
-
         private void tsmiDateAndTime_Click(object sender, EventArgs e)
         {
-            // TODO: Фикс курсор
+            // TODO: Пофиксить курсор
             tbMain.Text += DateTime.Now.ToString() + " ";
+            tbMain.SelectionStart = tbMain.Text.Length;
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveCheck();
+        }
+        private void tsmiWordWrap_Click(object sender, EventArgs e)
+        {
+            if (tsmiWordWrap.Checked == false)
+            {
+                tbMain.WordWrap = false;
+            }
+            else
+            {
+                tbMain.WordWrap = true;
+            }
+        }
+        private void tsmiFont_Click(object sender, EventArgs e)
+        {
+            FontDialog fontdialog = new FontDialog();
+            if (fontdialog.ShowDialog() == DialogResult.OK)
+            {
+                tbMain.Font = fontdialog.Font;
+            }
         }
 
         #region Methods
@@ -158,10 +142,8 @@ namespace NoteApp
                 }
             }
         }
-
         private void SaveCheck()
         {
-            // TODO: доделать (удалять всё)
             if (string.IsNullOrWhiteSpace(tbMain.Text))
             {
                 tbMain.Clear();
@@ -187,6 +169,12 @@ namespace NoteApp
                 }
             }
         }
+
+        public void TestMethod(string findText, bool direction, bool register)
+        {
+
+        }
         #endregion
+
     }
 }

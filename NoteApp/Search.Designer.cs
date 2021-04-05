@@ -94,6 +94,7 @@ namespace NoteApp
             // rbDown
             // 
             this.rbDown.AutoSize = true;
+            this.rbDown.Checked = true;
             this.rbDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rbDown.Location = new System.Drawing.Point(257, 87);
             this.rbDown.Name = "rbDown";
@@ -111,7 +112,6 @@ namespace NoteApp
             this.rbUp.Name = "rbUp";
             this.rbUp.Size = new System.Drawing.Size(60, 19);
             this.rbUp.TabIndex = 6;
-            this.rbUp.TabStop = true;
             this.rbUp.Text = "Вверх";
             this.rbUp.UseVisualStyleBackColor = true;
             // 
