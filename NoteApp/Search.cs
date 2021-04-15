@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NoteApp
@@ -15,8 +8,8 @@ namespace NoteApp
         private bool direction;
         private bool register;
 
-        private Form1 Form;
-        public SearchForm(Form1 form)
+        private MainForm Form;
+        public SearchForm(MainForm form)
         {
             this.Form = form;
             InitializeComponent();
@@ -30,6 +23,7 @@ namespace NoteApp
 
         internal void btnFindNext_Click(object sender, EventArgs e)
         {
+            
             #region direction
             if (rbDown.Checked == true)
             {
@@ -52,7 +46,7 @@ namespace NoteApp
             }
             #endregion
             
-            Form.TestMethod(tbSearch.Text, direction, register);
+            Form.SearchMethod(tbSearch.Text, direction, register);
 
 
         }

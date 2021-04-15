@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace NoteApp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             // TODO: Добавить выведение названия файла в тайтл
             InitializeComponent();
         }
 
         string path;
+
+        int length;
+        int StartIndex;
 
         private void tsmiCreate_Click(object sender, EventArgs e)
         {
@@ -38,7 +43,7 @@ namespace NoteApp
         }
         private void tsmiFind_Click(object sender, EventArgs e)
         {
-            // TODO: доделать поиск
+
             SearchForm sf = new SearchForm(this);
             sf.Show();
         }
@@ -60,13 +65,23 @@ namespace NoteApp
         }
         private void tsmiDateAndTime_Click(object sender, EventArgs e)
         {
-            // TODO: Пофиксить курсор
-            tbMain.Text += DateTime.Now.ToString() + " ";
+            // TODO: Пофиксить курсор       
+
+            //tbMain.Text += DateTime.Now.ToString() + " ";
+            //tbMain.SelectionStart = tbMain.Text.Length;
+
+            tbMain.Text = tbMain.Text.Insert(tbMain.SelectionStart, $"{DateTime.Now.ToShortDateString() }");
             tbMain.SelectionStart = tbMain.Text.Length;
+
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveCheck();
+        }
+        private void tsmiAboutProgramm_Click(object sender, EventArgs e)
+        {
+            AboutProgramm aboutProgramm = new AboutProgramm();
+            aboutProgramm.Show();
         }
         private void tsmiWordWrap_Click(object sender, EventArgs e)
         {
@@ -170,11 +185,17 @@ namespace NoteApp
             }
         }
 
-        public void TestMethod(string findText, bool direction, bool register)
+        public void SearchMethod(string findText, bool direction, bool register)
         {
+            // TODO: доделать поиск
 
+            if (tbMain.Text.IndexOf(findText, length) >= 0)
+            {
+                StartIndex = tbMain.Text.IndexOf(findText, length);
+                tbMain.Select(StartIndex, findText.Length);
+                length += findText.Length;
+            }
         }
         #endregion
-
     }
 }

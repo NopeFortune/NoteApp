@@ -1,7 +1,7 @@
 ﻿
 namespace NoteApp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,7 +29,7 @@ namespace NoteApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCreate = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +53,7 @@ namespace NoteApp
             this.форматToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiWordWrap = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAboutProgramm = new System.Windows.Forms.ToolStripMenuItem();
             this.tbMain = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +63,8 @@ namespace NoteApp
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
             this.правкаToolStripMenuItem,
-            this.форматToolStripMenuItem});
+            this.форматToolStripMenuItem,
+            this.tsmiAboutProgramm});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -256,18 +258,23 @@ namespace NoteApp
             this.tsmiFont.Text = "Шрифт";
             this.tsmiFont.Click += new System.EventHandler(this.tsmiFont_Click);
             // 
+            // tsmiAboutProgramm
+            // 
+            this.tsmiAboutProgramm.Name = "tsmiAboutProgramm";
+            this.tsmiAboutProgramm.Size = new System.Drawing.Size(94, 20);
+            this.tsmiAboutProgramm.Text = "О программе";
+            this.tsmiAboutProgramm.Click += new System.EventHandler(this.tsmiAboutProgramm_Click);
+            // 
             // tbMain
             // 
             this.tbMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbMain.Location = new System.Drawing.Point(0, 24);
             this.tbMain.Multiline = true;
             this.tbMain.Name = "tbMain";
-            this.tbMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbMain.Size = new System.Drawing.Size(800, 426);
             this.tbMain.TabIndex = 1;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -276,7 +283,7 @@ namespace NoteApp
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -309,10 +316,11 @@ namespace NoteApp
         private System.Windows.Forms.ToolStripMenuItem tsmiGoOn;
         private System.Windows.Forms.ToolStripMenuItem tsmiSelectAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDateAndTime;
-        private System.Windows.Forms.TextBox tbMain;
         private System.Windows.Forms.ToolStripMenuItem форматToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiWordWrap;
         private System.Windows.Forms.ToolStripMenuItem tsmiFont;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAboutProgramm;
+        private System.Windows.Forms.TextBox tbMain;
     }
 }
 
